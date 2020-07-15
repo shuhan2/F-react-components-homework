@@ -17,8 +17,6 @@ class Chat extends Component {
 
   componentDidMount() {
     const defaultMessage = answersData.find((answer) => answer.tags.includes('DEFAULT'));
-    const messages = this.state.messages.concat(defaultMessage);
-    console.log("message length: " + this.state.messages.length)
     setTimeout(() => {
       this.setState({
         shop: shopData,
@@ -29,6 +27,9 @@ class Chat extends Component {
 
   setMessage = name => {
     this.state.messages.push(name)
+    if (answersData.find((answer) => answer.tags.includes(name.text))) {
+      this.state.messages.push(answersData.find((answer) => answer.tags.includes(name.text)))
+    }
     this.setState({shop : this.state.shop, messages: this.state.messages})
   };
 
